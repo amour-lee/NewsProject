@@ -22,6 +22,16 @@ class Config(object):
     # 准备秘钥
     SECRET_KEY = 'ajkhdflhslfjlfh'
 
+    # 配置Session:将flask的session数据引导到redis
+    SESSION_TYPE = 'redis'  # 存储到redis
+    # 配置redis的位置
+    SESSION_REDIS=StrictRedis(host=REDIS_HOST,port=REDIS_PORT)
+    # 使用签名将session的明文转成密文
+    SESSION_USE_SIGNER = True
+    # 设置session有效期：一天，以秒为单位
+    PERMANENT_SESSION_LIFETIME = 60*60*24
+
+
 # 加载app的配置
 app.config.from_object(Config)
 
