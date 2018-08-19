@@ -4,7 +4,7 @@ from redis import StrictRedis
 # 准备配置类
 class Config(object):
     """app配置类"""
-    DEBUG = True
+    # DEBUG = True
 
     # 配置MySQL:指定数据库位置
     SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql@mysql@127.0.0.1:3306/information_new'
@@ -26,3 +26,15 @@ class Config(object):
     SESSION_USE_SIGNER = True
     # 设置session有效期：一天，以秒为单位
     PERMANENT_SESSION_LIFETIME = 60*60*24
+
+class DevelopmentConfig(Config):
+    """开发环境配置类
+        如果开发环境的配置和父类一致，可以直接pass
+        """
+    DEBUG = True
+
+class ProductionConfig(Config):
+    """生产环境配置类
+        实际开发中，需要额外配置生产环境下的数据库和其他的信息
+        """
+    DEBUG = False
