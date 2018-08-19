@@ -38,3 +38,9 @@ class ProductionConfig(Config):
         实际开发中，需要额外配置生产环境下的数据库和其他的信息
         """
     DEBUG = False
+
+# 工厂方法需要的原材料
+configs = {
+    'dev':DevelopmentConfig,
+    'prod':ProductionConfig
+}
