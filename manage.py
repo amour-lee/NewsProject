@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
 from redis import StrictRedis
@@ -44,6 +45,10 @@ redis_store = StrictRedis(host = Config.REDIS_HOST,port = Config.REDIS_PORT)
 # 配置和开启CSRF保护
 # 什么情况下才代表保护成功:如果用户发送 POST，DELETE, PUT, ...时，没有携带csrf_token或者错误，服务器返回状态码400/403
 CSRFProtect(app)
+
+# 配置Session:将flask中session的数据引导到redis
+Session(app)
+
 @app.route('/')
 def index():
     return 'index'
