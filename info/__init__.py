@@ -5,6 +5,8 @@ from flask_wtf import CSRFProtect
 from redis import StrictRedis
 from config import configs
 
+# 创建一个空的db对象
+db = SQLAlchemy()
 
 def create_app(config_name):
     """创建app的工厂方法"""
@@ -18,7 +20,7 @@ def create_app(config_name):
     app.config.from_object(config_class)
 
     # 配置MySQL
-    db = SQLAlchemy(app)
+    db.init_app(app)
 
     # 配置redis
     redis_store = StrictRedis(host = config_class.REDIS_HOST,port = config_class.REDIS_PORT)
