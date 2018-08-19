@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_script import Manager
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
 from flask_wtf import CSRFProtect
@@ -49,10 +50,16 @@ CSRFProtect(app)
 # 配置Session:将flask中session的数据引导到redis
 Session(app)
 
+# 创建脚本管理器对象
+manager = Manager(app)
+
 @app.route('/')
 def index():
     return 'index'
 
-
+# 准备程序的启动入口
 if __name__ == '__main__':
-    app.run()
+    # app.run()
+
+    # 启动程序
+    manager.run()
