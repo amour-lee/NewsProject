@@ -1,4 +1,5 @@
 from flask import Flask
+from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
 from flask_session import Session
 from flask_sqlalchemy import SQLAlchemy
@@ -52,6 +53,12 @@ Session(app)
 
 # 创建脚本管理器对象
 manager = Manager(app)
+
+# 迁移时让app和db建立关联
+Migrate(app,db)
+# 把迁移脚本命令添加到脚本管理器
+# 参数1：别名,参数2：迁移命令
+manager.add_command('db',MigrateCommand)
 
 @app.route('/')
 def index():
