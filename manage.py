@@ -1,8 +1,7 @@
 from flask_migrate import Migrate, MigrateCommand
 from flask_script import Manager
-from flask_sqlalchemy import SQLAlchemy
-
 from info import create_app,db
+from flask import current_app
 
 
 # 调用工厂方法，创建app
@@ -19,6 +18,18 @@ manager.add_command('db',MigrateCommand)
 
 @app.route('/')
 def index():
+
+    # 测试日志等级
+    import logging
+    logging.debug('测试debug')
+    logging.info('测试info')
+    logging.error('测试error')
+    logging.warning('测试warning')
+    logging.fatal('测试fatal')
+
+    # 注意点：默认等级DEBUG，我们配置的等级是影响logging模块的。所以最好使用logging模块输出日志
+    current_app.logger.debug('测试 current_app debug')
+
     return 'index'
 
 # 准备程序的启动入口
