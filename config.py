@@ -1,5 +1,5 @@
 from redis import StrictRedis
-
+import logging
 
 # 准备配置类
 class Config(object):
@@ -33,11 +33,18 @@ class DevelopmentConfig(Config):
         """
     DEBUG = True
 
+    # 开发环境的日志等级为调试模式
+    LOGGING_LEVEL = logging.DEBUG
+
+
 class ProductionConfig(Config):
     """生产环境配置类
         实际开发中，需要额外配置生产环境下的数据库和其他的信息
         """
     DEBUG = False
+
+    # 生产环境的日志等级为调试模式
+    LOGGING_LEVEL = logging.WARNING
 
 # 工厂方法需要的原材料
 configs = {
